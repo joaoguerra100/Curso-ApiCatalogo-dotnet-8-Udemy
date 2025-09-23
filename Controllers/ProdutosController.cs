@@ -1,7 +1,6 @@
-using APICatalogo.Context;
 using APICatalogo.Models;
+using APICatalogo.Repositories.Interface;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace APICatalogo.Controllers
 {
@@ -9,46 +8,46 @@ namespace APICatalogo.Controllers
     [Route("[controller]")]
     public class ProdutosController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly IUnitOfWork _uof;
 
-        public ProdutosController(AppDbContext context)
+        public ProdutosController(IUnitOfWork uof)
         {
-            _context = context;
+            _uof = uof;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Produto>>> Get()
+        public ActionResult<IEnumerable<Produto>> Get()
         {
-            var produtos = await _context.Produtos.AsNoTracking().ToListAsync();
+            var produtos = _uof.ProdutoRepository.GetProdutos().ToList();
             if (produtos is null)
             {
                 return NotFound("Produtos nao encontrados");
             }
-            return produtos;
+            return Ok(produtos);
         }
 
         [HttpGet("{id:int}", Name = "ObterProduto")]
-        public async Task<ActionResult<Produto>> Get(int id)
+        public ActionResult<Produto> Get(int id)
         {
-            var produto = await _context.Produtos.AsNoTracking().FirstOrDefaultAsync(p => p.ProdutoId == id);
+            var produto = _uof.ProdutoRepository.GetProduto(id);
             if (produto is null)
             {
                 return NotFound($"Nenhum produto com este Id={id}");
             }
 
-            return produto;
+            return Ok(produto);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(Produto produto)
+        public ActionResult Post(Produto produto)
         {
             if (produto is null)
             {
                 return BadRequest("Dados invalidos");
             }
 
-            await _context.Produtos.AddAsync(produto);
-            _context.SaveChanges();
+            _uof.ProdutoRepository.Create(produto);
+            _uof.Commit();
 
             return new CreatedAtRouteResult("ObterProduto", new { id = produto.ProdutoId }, produto);
         }
@@ -61,26 +60,32 @@ namespace APICatalogo.Controllers
                 return BadRequest("Dados invalidos");
             }
 
-            _context.Entry(produto).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            _context.SaveChanges();
-
-            return Ok(produto);
+            bool atualizado = _uof.ProdutoRepository.Update(produto);
+            _uof.Commit();
+            if (atualizado)
+            {
+                return Ok(produto);
+            }
+            else
+            {
+                return StatusCode(500, $"Falha ao atualizar o produto com id: {id}");
+            }
         }
 
         [HttpDelete("{id:int}")]
-        public async Task<ActionResult> Delete(int id)
+        public ActionResult Delete(int id)
         {
-            var produto = await _context.Produtos.FirstOrDefaultAsync(p => p.ProdutoId == id);
+            bool deletado = _uof.ProdutoRepository.Delete(id);
+            _uof.Commit();
 
-            if (produto is null)
+            if (deletado)
             {
-                return NotFound($"Produto com id={id} não encontrada.");
+                return Ok($"Produto de id: {id} foi excluido");
             }
-
-            _context.Produtos.Remove(produto);
-            _context.SaveChanges();
-
-            return Ok(produto);
+            else
+            {
+                return StatusCode(500, $"Falha ao Excluir o produto com id: {id}");
+            }
         }
     }
 }

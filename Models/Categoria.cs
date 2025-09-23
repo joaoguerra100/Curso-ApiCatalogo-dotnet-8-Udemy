@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace APICatalogo.Models
 {
@@ -21,6 +22,7 @@ namespace APICatalogo.Models
         [StringLength(300)]
         public string? ImagemURL { get; set; }
 
+        [JsonIgnore]
         public ICollection<Produto>? Produtos { get; set; }
     }
 }

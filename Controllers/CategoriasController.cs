@@ -1,8 +1,8 @@
-using APICatalogo.Context;
+using APICatalogo.DTOs;
 using APICatalogo.Filters;
 using APICatalogo.Models;
+using APICatalogo.Repositories.Interface;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace APICatalogo.Controllers
 {
@@ -10,36 +10,48 @@ namespace APICatalogo.Controllers
     [Route("[controller]")]
     public class CategoriasController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly IUnitOfWork _uof;
         private readonly ILogger _logger;
 
-        public CategoriasController(AppDbContext context, ILogger<CategoriasController> logger)
+        public CategoriasController(IUnitOfWork uof, ILogger<CategoriasController> logger)
         {
-            _context = context;
+            _uof = uof;
             _logger = logger;
         }
 
-        [HttpGet("produtos")]
+        /* [HttpGet("produtos")]
         public async Task<ActionResult<IEnumerable<Categoria>>> GetCategoriasProdutos()
         {
             _logger.LogInformation("======================Get api/categorias/produtos==============");
 
-            var categoria = await _context.Categorias.Include(p => p.Produtos).AsNoTracking().ToListAsync();
+            var categoria = await _reporitory.Categorias.Include(p => p.Produtos).AsNoTracking().ToListAsync();
             return categoria;
-        }
+        } */
 
         [HttpGet]
         [ServiceFilter(typeof(ApiLoggingFilter))]
-        public async Task<ActionResult<IEnumerable<Categoria>>> Get()
+        public ActionResult<IEnumerable<CategoriaDTO>> Get()
         {
-            var categoria = await _context.Categorias.AsNoTracking().ToListAsync();
-            return categoria;
+            var categorias = _uof.CategoriaRepository.GetCategorias();
+
+            var categoriasDto = new List<CategoriaDTO>();
+            foreach (var categoria in categorias)
+            {
+                var categoriaDto = new CategoriaDTO
+                {
+                    CategoriaId = categoria.CategoriaId,
+                    Nome = categoria.Nome,
+                    ImagemURL = categoria.ImagemURL
+                };
+                categoriasDto.Add(categoriaDto);
+            }
+            return Ok(categoriasDto);
         }
 
         [HttpGet("{id:int}", Name = "ObterCategoria")]
-        public async Task<ActionResult<Categoria>> Get(int id)
+        public ActionResult<CategoriaDTO> Get(int id)
         {
-            var categoria = await _context.Categorias.AsNoTracking().FirstOrDefaultAsync(p => p.CategoriaId == id);
+            var categoria = _uof.CategoriaRepository.GetCategoria(id);
 
             _logger.LogInformation($"======================Get api/categorias/{id}==============");
 
@@ -49,51 +61,93 @@ namespace APICatalogo.Controllers
                 return NotFound($"Categoria com id={id} nao encontrada");
             }
 
-            return categoria;
+            var categoriaDto = new CategoriaDTO()
+            {
+                CategoriaId = categoria.CategoriaId,
+                Nome = categoria.Nome,
+                ImagemURL = categoria.ImagemURL
+            };
+
+            return Ok(categoriaDto);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(Categoria categoria)
+        public ActionResult<CategoriaDTO> Post(CategoriaDTO categoriaDto)
         {
-            if (categoria is null)
+            if (categoriaDto is null)
             {
                 return BadRequest("Dados invalidos");
             }
 
-            _context.Categorias.AddAsync(categoria);
-            _context.SaveChanges();
+            var categoria = new Categoria()
+            {
+                CategoriaId = categoriaDto.CategoriaId,
+                Nome = categoriaDto.Nome,
+                ImagemURL = categoriaDto.ImagemURL
+            };
 
-            return new CreatedAtRouteResult("ObterCategoria", new { id = categoria.CategoriaId }, categoria);
+            var categoriaCriada = _uof.CategoriaRepository.Create(categoria);
+            _uof.Commit();
+
+            var novaCategoriaDto = new CategoriaDTO()
+            {
+                CategoriaId = categoriaCriada.CategoriaId,
+                Nome = categoriaCriada.Nome,
+                ImagemURL = categoriaCriada.ImagemURL
+            };
+
+            return new CreatedAtRouteResult("ObterCategoria", new { id = novaCategoriaDto.CategoriaId }, novaCategoriaDto);
         }
 
         [HttpPut("{id:int}")]
-        public ActionResult Put(int id, Categoria categoria)
+        public ActionResult<CategoriaDTO> Put(int id, CategoriaDTO categoriaDto)
         {
-            if (id != categoria.CategoriaId)
+            if (id != categoriaDto.CategoriaId)
             {
                 return BadRequest("Dados invalidos");
             }
 
-            _context.Entry(categoria).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            _context.SaveChanges();
+            var categoria = new Categoria()
+            {
+                CategoriaId = categoriaDto.CategoriaId,
+                Nome = categoriaDto.Nome,
+                ImagemURL = categoriaDto.ImagemURL
+            };
 
-            return Ok(categoria);
+            var categoriaAtualizada = _uof.CategoriaRepository.Update(categoria);
+            _uof.Commit();
+
+            var categoriaAtualizadaDto = new CategoriaDTO()
+            {
+                CategoriaId = categoriaAtualizada.CategoriaId,
+                Nome = categoriaAtualizada.Nome,
+                ImagemURL = categoriaAtualizada.ImagemURL
+            };
+
+            return Ok(categoriaAtualizadaDto);
         }
 
         [HttpDelete("{id:int}")]
-        public async Task<ActionResult<Categoria>> Delete(int id)
+        public ActionResult<CategoriaDTO> Delete(int id)
         {
-            var categoria = await _context.Categorias.FirstOrDefaultAsync(p => p.CategoriaId == id);
+            var categoria = _uof.CategoriaRepository.GetCategoria(id);
 
             if (categoria == null)
             {
                 return NotFound($"Caregoria com id={id} não encontrada.");
             }
 
-            _context.Categorias.Remove(categoria);
-            _context.SaveChanges();
+            var categoriaExcluida = _uof.CategoriaRepository.Delete(id);
+            _uof.Commit();
 
-            return Ok(categoria);
+            var categoriaExcluidaDto = new CategoriaDTO()
+            {
+                CategoriaId = categoriaExcluida.CategoriaId,
+                Nome = categoriaExcluida.Nome,
+                ImagemURL = categoriaExcluida.ImagemURL
+            };
+
+            return Ok(categoriaExcluidaDto);
         }
     }
 }
