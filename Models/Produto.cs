@@ -26,7 +26,6 @@ namespace APICatalogo.Models
         [Required(ErrorMessage ="A ImagemUrl e obrigatorio")]
         [StringLength(300, MinimumLength = 10)]
         public string? ImagemUrl { get; set; }
-
         
         public float Estoque { get; set; }
         public DateTime DataCadastro { get; set; }
