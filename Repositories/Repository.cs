@@ -1,6 +1,7 @@
 using System.Linq.Expressions;
 using APICatalogo.Context;
 using APICatalogo.Repositories.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace APICatalogo.Repositories
 {
@@ -13,15 +14,15 @@ namespace APICatalogo.Repositories
             _context = context;
         }
 
-        public IEnumerable<T> GetAll()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            var list = _context.Set<T>().ToList();
+            var list = await _context.Set<T>().ToListAsync();
             return list;
         }
 
-        public T? Get(Expression<Func<T, bool>> predicate)
+        public async Task<T?> GetAsync(Expression<Func<T, bool>> predicate)
         {
-            var temp = _context.Set<T>().FirstOrDefault(predicate);
+            var temp = await _context.Set<T>().FirstOrDefaultAsync(predicate);
             return temp;
         }
 

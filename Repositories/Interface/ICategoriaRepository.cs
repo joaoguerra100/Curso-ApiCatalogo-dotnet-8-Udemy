@@ -1,13 +1,16 @@
 using APICatalogo.Models;
+using APICatalogo.Pagination;
 
 namespace APICatalogo.Repositories.Interface
 {
     public interface ICategoriaRepository
     {
-        public IEnumerable<Categoria> GetCategorias();
-        public Categoria GetCategoria(int id);
-        public Categoria Create(Categoria categoria);
-        public Categoria Update(Categoria categoria);
-        public Categoria Delete(int id);
+        Task<PagedList<Categoria>> GetCategoriaPaginadoAsync(CategoriasParameters categoriasParams);
+        Task<PagedList<Categoria>> GetCategoriasFiltrNomeAsync(CategoriasFiltroNome categoriasParams);
+        Task<IEnumerable<Categoria>> GetCategoriasAsync();
+        Task <Categoria> GetCategoriaAsync(int id);
+        Categoria Create(Categoria categoria);
+        Categoria Update(Categoria categoria);
+        Categoria Delete(int id);
     }
 }

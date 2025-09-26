@@ -1,5 +1,6 @@
 using APICatalogo.Context;
 using APICatalogo.Models;
+using APICatalogo.Pagination;
 using APICatalogo.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,15 +15,41 @@ namespace APICatalogo.Repositories
             _context = context;
         }
 
-        public IEnumerable<Categoria> GetCategorias()
+        public async Task<PagedList<Categoria>> GetCategoriasFiltrNomeAsync(CategoriasFiltroNome categoriasParams)
         {
-            var categorias = _context.Categorias.AsNoTracking().ToList();
+            var categorias = await GetCategoriasAsync();
+
+            if (!string.IsNullOrEmpty(categoriasParams.Nome))
+            {
+                categorias = categorias.Where(c => c.Nome.Contains(categoriasParams.Nome));
+            }
+
+            var categoriasFiltradas = await PagedList<Categoria>.ToPagedListAsync(categorias.AsQueryable(), categoriasParams.PageNumber, categoriasParams.PageSize);
+
+            return categoriasFiltradas;
+        }
+
+        public async Task<PagedList<Categoria>> GetCategoriaPaginadoAsync(CategoriasParameters categoriasParams)
+        {
+            var categorias = await GetCategoriasAsync();
+
+            var categoriasOrdenadas = categorias.OrderBy(p => p.CategoriaId).AsQueryable();
+
+            var resultado = await PagedList<Categoria>.ToPagedListAsync(categoriasOrdenadas,
+                categoriasParams.PageNumber, categoriasParams.PageSize);
+
+            return resultado;
+        }
+
+        public async Task<IEnumerable<Categoria>> GetCategoriasAsync()
+        {
+            var categorias = await _context.Categorias.AsNoTracking().ToListAsync();
             return categorias;
         }
 
-        public Categoria GetCategoria(int id)
+        public async Task<Categoria> GetCategoriaAsync(int id)
         {
-            var categoria = _context.Categorias.AsNoTracking().FirstOrDefault(c => c.CategoriaId == id);
+            var categoria = await _context.Categorias.AsNoTracking().FirstOrDefaultAsync(c => c.CategoriaId == id);
             return categoria;
         }
 
@@ -47,7 +74,7 @@ namespace APICatalogo.Repositories
             }
 
             _context.Entry(categoria).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-           // _context.SaveChanges();
+            // _context.SaveChanges();
 
             return categoria;
         }

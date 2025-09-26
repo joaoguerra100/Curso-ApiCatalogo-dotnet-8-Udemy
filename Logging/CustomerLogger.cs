@@ -31,7 +31,8 @@ namespace APICatalogo.Logging
 
         private void EscreverTextoNoArquivo(string mensagem)
         {
-            string caminhoArquivoLog = @"d:\dados\log\dados_log.txt";
+            // E necessario criar este arquivo para funcionar e ai descomentar esya linha
+            /* string caminhoArquivoLog = @"d:\dados\log\dados_log.txt";
 
             using (StreamWriter streamWriter = new StreamWriter(caminhoArquivoLog, true))
             {
@@ -44,7 +45,7 @@ namespace APICatalogo.Logging
                 {
                     throw;
                 }
-            }
+            } */
         }
     }
 }

@@ -3863,6 +3863,7 @@
         "net8.0"
       ],
       "sources": {
+        "http://binario.caixa:8081/repository/nuget.org-proxy/index.json": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
