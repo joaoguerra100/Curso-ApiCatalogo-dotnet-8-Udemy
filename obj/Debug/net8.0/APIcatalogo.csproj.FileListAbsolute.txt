@@ -144,3 +144,13 @@ C:\Sistemas\Projetos\dotnet\APIcatalogo\bin\Debug\net8.0\zh-Hans\Microsoft.CodeA
 C:\Sistemas\Projetos\dotnet\APIcatalogo\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Sistemas\Projetos\dotnet\APIcatalogo\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 C:\Sistemas\Projetos\dotnet\APIcatalogo\obj\Debug\net8.0\APIcatalogo.sourcelink.json
+C:\Sistemas\Projetos\dotnet\APIcatalogo\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Sistemas\Projetos\dotnet\APIcatalogo\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Sistemas\Projetos\dotnet\APIcatalogo\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Sistemas\Projetos\dotnet\APIcatalogo\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Sistemas\Projetos\dotnet\APIcatalogo\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
+C:\Sistemas\Projetos\dotnet\APIcatalogo\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Sistemas\Projetos\dotnet\APIcatalogo\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\Sistemas\Projetos\dotnet\APIcatalogo\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Sistemas\Projetos\dotnet\APIcatalogo\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Sistemas\Projetos\dotnet\APIcatalogo\bin\Debug\net8.0\FakeData\dados_mockados.json

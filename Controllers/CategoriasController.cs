@@ -4,6 +4,7 @@ using APICatalogo.Filters;
 using APICatalogo.Models;
 using APICatalogo.Pagination;
 using APICatalogo.Repositories.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -68,6 +69,7 @@ namespace APICatalogo.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [ServiceFilter(typeof(ApiLoggingFilter))]
         public async Task<ActionResult<IEnumerable<CategoriaDTO>>> Get()
         {
@@ -110,12 +112,12 @@ namespace APICatalogo.Controllers
 
             var categoria = categoriaDto.ToCategoria();
 
-            var categoriaCriada = _uof.CategoriaRepository.Create(categoria);
+            var categoriaCriada = _uof.CategoriaRepository.Create(categoria!);
             await _uof.CommitAsync();
 
             var novaCategoriaDto = categoriaCriada.ToCategoriaDTO();
 
-            return new CreatedAtRouteResult("ObterCategoria", new { id = novaCategoriaDto.CategoriaId }, novaCategoriaDto);
+            return new CreatedAtRouteResult("ObterCategoria", new { id = novaCategoriaDto!.CategoriaId }, novaCategoriaDto);
         }
 
         [HttpPut("{id:int}")]
@@ -128,7 +130,7 @@ namespace APICatalogo.Controllers
 
             var categoria = categoriaDto.ToCategoria();
 
-            var categoriaAtualizada = _uof.CategoriaRepository.Update(categoria);
+            var categoriaAtualizada = _uof.CategoriaRepository.Update(categoria!);
             await _uof.CommitAsync();
 
             var categoriaAtualizadaDto = categoriaAtualizada.ToCategoriaDTO();

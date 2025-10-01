@@ -1,5 +1,6 @@
 using APICatalogo.Context;
 using APICatalogo.Repositories.Interface;
+using APICatalogo.Repositories.Mocks;
 
 namespace APICatalogo.Repositories
 {
@@ -19,7 +20,9 @@ namespace APICatalogo.Repositories
         {
             get
             {
-                return _produtoRepo = _produtoRepo ?? new ProdutoRepository(_context);
+                //Nesta linha esta usando o banco de dados
+                //return _produtoRepo = _produtoRepo ?? new ProdutoRepository(_context);
+                return _produtoRepo = _produtoRepo ?? new ProdutoRepositoryMock();
             }
         }
 
@@ -27,7 +30,9 @@ namespace APICatalogo.Repositories
         {
             get
             {
-                return _categoriaRepo = _categoriaRepo ?? new CategoriaRepository(_context);
+                //Nesta linha esta usando o banco de dados
+                //return _categoriaRepo = _categoriaRepo ?? new CategoriaRepository(_context);
+                return _categoriaRepo = _categoriaRepo ?? new CategoriaRepositoryMock();
             }
         }
 
