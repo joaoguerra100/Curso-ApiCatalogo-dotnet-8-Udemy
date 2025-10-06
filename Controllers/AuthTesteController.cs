@@ -3,6 +3,7 @@ using System.Security.Claims;
 using APICatalogo.DTOs;
 using APICatalogo.Models;
 using APICatalogo.Services.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APICatalogo.Controllers
@@ -126,8 +127,27 @@ namespace APICatalogo.Controllers
         }
 
         [HttpPost]
+        [Route("revoke/{username}")]
+        [Authorize(Policy = "ExclusiveOnly")]
+        public IActionResult RevokeMockado(string username)
+        {
+            var user = _mockUsers.FirstOrDefault(u => u.UserName == username);
+
+            if (user == null)
+            {
+                return BadRequest("Invalid user name");
+            }
+
+            user.RefreshToken = null;
+            user.RefreshTokenExpiryTime = DateTime.MinValue;
+
+            return NoContent();
+        }
+
+        [HttpPost]
         [Route("CreateRole")]
-        public IActionResult CreateRoleMockado(string roleName)
+        [Authorize(Policy = "SuperAdminOnly")]
+        public IActionResult CreateRole(string roleName)
         {
             if (string.IsNullOrWhiteSpace(roleName))
             {
@@ -156,7 +176,8 @@ namespace APICatalogo.Controllers
 
         [HttpPost]
         [Route("AddUserToRole")]
-        public IActionResult AddUserToRoleMockado(string email, string roleName)
+        [Authorize(Policy = "SuperAdminOnly")]
+        public IActionResult AddUserToRole(string email, string roleName)
         {
             var user = _mockUsers.FirstOrDefault(u => u.Email == email);
 
@@ -172,7 +193,7 @@ namespace APICatalogo.Controllers
 
             if (user.Roles.Contains(roleName, StringComparer.OrdinalIgnoreCase))
             {
-                return BadRequest(new  ResponseDTO { Status = "Error", Message = "User already has this role" });
+                return BadRequest(new ResponseDTO { Status = "Error", Message = "User already has this role" });
             }
 
             user.Roles.Add(roleName);
