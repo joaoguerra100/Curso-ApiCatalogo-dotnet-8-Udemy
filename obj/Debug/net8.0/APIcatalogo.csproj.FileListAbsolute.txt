@@ -154,3 +154,9 @@ C:\Sistemas\Projetos\dotnet\APIcatalogo\bin\Debug\net8.0\Microsoft.IdentityModel
 C:\Sistemas\Projetos\dotnet\APIcatalogo\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Sistemas\Projetos\dotnet\APIcatalogo\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Sistemas\Projetos\dotnet\APIcatalogo\bin\Debug\net8.0\FakeData\dados_mockados.json
+C:\Sistemas\Projetos\dotnet\APIcatalogo\bin\Debug\net8.0\Asp.Versioning.Abstractions.dll
+C:\Sistemas\Projetos\dotnet\APIcatalogo\bin\Debug\net8.0\Asp.Versioning.Http.dll
+C:\Sistemas\Projetos\dotnet\APIcatalogo\bin\Debug\net8.0\Asp.Versioning.Mvc.dll
+C:\Sistemas\Projetos\dotnet\APIcatalogo\bin\Debug\net8.0\Asp.Versioning.Mvc.ApiExplorer.dll
+C:\Sistemas\Projetos\dotnet\APIcatalogo\bin\Debug\net8.0\APIcatalogo.xml
+C:\Sistemas\Projetos\dotnet\APIcatalogo\obj\Debug\net8.0\APIcatalogo.xml

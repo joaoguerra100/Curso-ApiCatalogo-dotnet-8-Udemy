@@ -1,0 +1,188 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>APIcatalogo</name>
+    </assembly>
+    <members>
+        <member name="M:APICatalogo.Controllers.AuthController.Login(APICatalogo.DTOs.LoginModelDTO)">
+            <summary>
+            Verifica as credenciais de um usuario
+            </summary>
+            <param name="model">Um objeto do tipo UsuarioDTo</param>
+            <returns>Status 200 e o token para o cliente</returns>
+            <remarks> Retorna o Status 200 e o token </remarks>
+        </member>
+        <member name="M:APICatalogo.Controllers.AuthController.Register(APICatalogo.DTOs.RegisterModelDTO)">
+            <summary>
+            Registra um novo usuarui
+            </summary>
+            <param name="model">Um objeto UsuarioDTO</param>
+            <returns>Status 200</returns>
+            <remarks> Retorna o Status 200</remarks>
+        </member>
+        <member name="M:APICatalogo.Controllers.AuthTesteController.LoginMockado(APICatalogo.DTOs.LoginModelDTO)">
+            <summary>
+            Verifica as credenciais de um usuario
+            </summary>
+            <param name="model">Um objeto do tipo UsuarioDTo</param>
+            <returns>Status 200 e o token para o cliente</returns>
+            <remarks> Retorna o Status 200 e o token </remarks>
+        </member>
+        <member name="M:APICatalogo.Controllers.AuthTesteController.RegisterMockado(APICatalogo.DTOs.RegisterModelDTO)">
+            <summary>
+            Registra um novo usuarui
+            </summary>
+            <param name="model">Um objeto UsuarioDTO</param>
+            <returns>Status 200</returns>
+            <remarks> Retorna o Status 200</remarks>
+        </member>
+        <member name="M:APICatalogo.Controllers.CategoriasController.GetCategoriasFiltradas(APICatalogo.Pagination.CategoriasFiltroNome)">
+            <summary>
+            Obtem uma lista de categorias filtrados pelo nome
+            </summary>
+            <param name="categoriasFiltro"></param>
+            <returns> Uma paginação de categorias filtrados pelo nome</returns>
+        </member>
+        <member name="M:APICatalogo.Controllers.CategoriasController.Get(APICatalogo.Pagination.CategoriasParameters)">
+            <summary>
+            Uma lista de categorias Paginadas
+            </summary>
+            <param name="categoriasParameters"></param>
+            <returns>Uma paginação de categorias</returns>
+        </member>
+        <member name="M:APICatalogo.Controllers.CategoriasController.Get">
+            <summary>
+            Obtem uma lista de objetos Categoria
+            </summary>
+            <returns> Uma lista de objetos Categoria </returns>
+        </member>
+        <member name="M:APICatalogo.Controllers.CategoriasController.Get(System.Int32)">
+            <summary>
+            Obtem uma Categoria pelo seu ID
+            </summary>
+            <param name="id"></param>
+            <returns>Objetos Categoria</returns>
+        </member>
+        <member name="M:APICatalogo.Controllers.CategoriasController.Post(APICatalogo.DTOs.CategoriaDTO)">
+            <summary>
+            Inclui uma nova Categoria
+            </summary>
+            <remarks>
+            Exemplo de request:
+                POST api/categorias
+                {
+                    "categoriaId":1,
+                    "nome":"categoria1",
+                    "imagemUrl": "http://teste.net/1.jpg"
+                }
+            Retorna um objeto Categoria incluído.
+            </remarks>
+            <param name="categoriaDto">Objeto DTO da categoria</param>
+            <returns>O objeto Categoria incluída</returns>
+        </member>
+        <member name="M:APICatalogo.Controllers.CategoriasController.Put(System.Int32,APICatalogo.DTOs.CategoriaDTO)">
+            <summary>
+            Altera Categoria existente
+            </summary>
+            <remarks>
+            Exemplo de request:
+                POST api/categorias
+                {
+                    "nome":"categoria1",
+                    "imagemUrl": "http://teste.net/1.jpg"
+                }
+            Retorna um objeto Categoria alterado.
+            </remarks>
+            <param name="categoriaDto">Objeto DTO da categoria</param>
+            <returns>O objeto Categoria Alterado</returns>
+        </member>
+        <member name="M:APICatalogo.Controllers.CategoriasController.Delete(System.Int32)">
+            <summary>
+            Deleta Categoria existente
+            </summary>
+            <remarks>
+            Retorna Status code 200.
+            </remarks>
+            <param name="id">id da categoria</param>
+            <returns>Retorna Status code 200.</returns>
+        </member>
+        <member name="M:APICatalogo.Controllers.ProdutosController.GetProdutosFilterPreco(APICatalogo.Pagination.ProdutosFiltroPreco)">
+            <summary>
+            Obtem uma lista de produtos filtrados pelo preço
+            </summary>
+            <param name="produtosFiltroParams"></param>
+            <returns> Uma paginação de produtos filtrados pelo preço</returns>
+        </member>
+        <member name="M:APICatalogo.Controllers.ProdutosController.Get(APICatalogo.Pagination.ProdutosParameters)">
+            <summary>
+            Uma lista de produtos Paginadas
+            </summary>
+            <param name="produtosParams"></param>
+            <returns>Uma paginação de produtos</returns>
+        </member>
+        <member name="M:APICatalogo.Controllers.ProdutosController.Get">
+            <summary>
+            Exibe uma relação dos produtos
+            </summary>
+            <returns>Retorna uma lista de objetos Produto</returns>
+        </member>
+        <member name="M:APICatalogo.Controllers.ProdutosController.Get(System.Int32)">
+            <summary>
+            Obtem o produto pelo seu identificador produtoId
+            </summary>
+            <param name="id"> Codigo do produto</param>
+            <returns>Um objeto Produto</returns>
+        </member>
+        <member name="M:APICatalogo.Controllers.ProdutosController.Post(APICatalogo.DTOs.ProdutoDTO)">
+            <summary>
+            Inclui uma novo Produto
+            </summary>
+            <remarks>
+            Exemplo de request:
+                POST api/Produto
+                {
+                    "categoriaId":1,
+                    "nome":"categoria1",
+                    "descricao":"categoria1Desc",
+                    "preco":"100",
+                    "imagemUrl": "http://teste.net/1.jpg",
+                    "categoriaId": "1"
+                }
+            Retorna um objeto Produto incluído.
+            </remarks>
+            <param name="produtoDto">Objeto DTO da Produto</param>
+            <returns>O objeto Produto incluído</returns>
+        </member>
+        <member name="M:APICatalogo.Controllers.ProdutosController.Put(System.Int32,APICatalogo.DTOs.ProdutoDTO)">
+            <summary>
+            Atualiza uma novo Produto
+            </summary>
+            <remarks>
+            Exemplo de request:
+                Put api/Produto
+                {
+                    "categoriaId":1,
+                    "nome":"categoria1",
+                    "descricao":"categoria1Desc",
+                    "preco":"100",
+                    "imagemUrl": "http://teste.net/1.jpg",
+                    "categoriaId": "1"
+                }
+            Retorna um objeto Produto Alterado.
+            </remarks>
+            <param name="produtoDto">Objeto DTO da Produto</param>
+            <param name="id">id de Produto</param>
+            <returns>O objeto Produto Alterado</returns>
+        </member>
+        <member name="M:APICatalogo.Controllers.ProdutosController.Delete(System.Int32)">
+            <summary>
+            Deleta um Produto existente
+            </summary>
+            <remarks>
+            Retorna Status code 200.
+            </remarks>
+            <param name="id">id de Produto</param>
+            <returns>Retorna Status code 200.</returns>
+        </member>
+    </members>
+</doc>

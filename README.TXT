@@ -18,6 +18,8 @@ dotnet add package Newtonsoft.Json
 
 dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer --version 8.0.2
 dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore --version 8.0.5
+dotnet add package Asp.versioning.Mvc.ApiExplorer
+dotnet add package Asp.versioning.Http
 
 Curso de dotnet 8 webapi de catalogos na udemy pelo jose carlos macoratti
 curso: O essencial para criar APIs da Web na plataforma .NET

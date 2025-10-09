@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.RateLimiting;
@@ -12,6 +13,7 @@ using APICatalogo.Repositories.Interface;
 using APICatalogo.Repositories.Mocks;
 using APICatalogo.Services;
 using APICatalogo.Services.Interface;
+using Asp.Versioning;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.RateLimiting;
@@ -45,7 +47,24 @@ builder.Services.AddCors(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "apicatalogo", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "apicatalogo",
+        Version = "v1",
+        Description = "Catalogo de Produtos e Categorias",
+        TermsOfService = new Uri("https://teste.net/terms"),
+        Contact = new OpenApiContact
+        {
+            Name = "Teste",
+            Email = "teste@yahoo.com",
+            Url = new Uri("https://teste.net"),
+        },
+        License = new OpenApiLicense
+        {
+            Name = "Usar sobre LICX",
+            Url = new Uri("https://teste.net/license"),
+        }
+    });
 
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
     {
@@ -56,6 +75,11 @@ builder.Services.AddSwaggerGen(c =>
         In = ParameterLocation.Header,
         Description = "Bearer JWT",
     });
+
+    // Inclue os comentarios XML no swagger
+    var xmlFileName = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFileName));
+
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
@@ -144,7 +168,26 @@ builder.Services.AddRateLimiter(options =>
                                 PermitLimit = 5,
                                 QueueLimit = 0,
                                 Window = TimeSpan.FromSeconds(10)
-                            }));       
+                            }));
+});
+
+builder.Services.AddApiVersioning(o =>
+{
+    // Define a versao padrao da api
+    o.DefaultApiVersion = new ApiVersion(1, 0);
+    // quando a versao nao for especificada em uma requisiçao ela usara a versao padrao
+    o.AssumeDefaultVersionWhenUnspecified = true;
+    // faz com que as versoes da api devem ser incluidas no cabeçalho header
+    o.ReportApiVersions = true;
+    o.ApiVersionReader = ApiVersionReader.Combine(
+                        new QueryStringApiVersionReader(),
+                        new UrlSegmentApiVersionReader());
+}).AddApiExplorer(options =>
+{
+    // Formato da versao do swagger
+    options.GroupNameFormat = "'v'VVV";
+    // subistitui altomaticamente os links das versoes na url
+    options.SubstituteApiVersionInUrl = true;
 });
 
 builder.Services.AddScoped<ApiLoggingFilter>();

@@ -1,9 +1,9 @@
 using APICatalogo.DTOs;
 using APICatalogo.DTOs.Mappings;
 using APICatalogo.Filters;
-using APICatalogo.Models;
 using APICatalogo.Pagination;
 using APICatalogo.Repositories.Interface;
+using Asp.Versioning;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
@@ -12,8 +12,11 @@ using Newtonsoft.Json;
 namespace APICatalogo.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
+    [ApiVersion("1.0")]
     [EnableRateLimiting("fixedwindow")]
+    [Produces("application/json")] // Faz o metodo de resposta ser o padrao o json
+    [ApiConventionType(typeof(DefaultApiConventions))] // Adiciona os Status a todos os metodos actions como 200,404, 500 etc...
     public class CategoriasController : ControllerBase
     {
         private readonly IUnitOfWork _uof;
@@ -25,6 +28,11 @@ namespace APICatalogo.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Obtem uma lista de categorias filtrados pelo nome
+        /// </summary>
+        /// <param name="categoriasFiltro"></param>
+        /// <returns> Uma paginação de categorias filtrados pelo nome</returns>
         [HttpGet("filter/nome/paginacao")]
         public async Task<ActionResult<IEnumerable<CategoriaDTO>>> GetCategoriasFiltradas([FromQuery] CategoriasFiltroNome categoriasFiltro)
         {
@@ -48,6 +56,11 @@ namespace APICatalogo.Controllers
 
         }
 
+        /// <summary>
+        /// Uma lista de categorias Paginadas
+        /// </summary>
+        /// <param name="categoriasParameters"></param>
+        /// <returns>Uma paginação de categorias</returns>
         [HttpGet("Paginacao")]
         public async Task<ActionResult<IEnumerable<CategoriaDTO>>> Get([FromQuery] CategoriasParameters categoriasParameters)
         {
@@ -70,11 +83,16 @@ namespace APICatalogo.Controllers
             return Ok(categoriasDto);
         }
 
+        /// <summary>
+        /// Obtem uma lista de objetos Categoria
+        /// </summary>
+        /// <returns> Uma lista de objetos Categoria </returns>
         [HttpGet]
         [Authorize]
         [ServiceFilter(typeof(ApiLoggingFilter))]
         [DisableRateLimiting]// Desabilita o limite de Requisiçoes que se pode fazer
         public async Task<ActionResult<IEnumerable<CategoriaDTO>>> Get()
+
         {
             var categorias = await _uof.CategoriaRepository.GetCategoriasAsync();
             if (categorias == null)
@@ -87,6 +105,11 @@ namespace APICatalogo.Controllers
             return Ok(categoriasDto);
         }
 
+        /// <summary>
+        /// Obtem uma Categoria pelo seu ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Objetos Categoria</returns>
         [HttpGet("{id:int}", Name = "ObterCategoria")]
         public async Task<ActionResult<CategoriaDTO>> Get(int id)
         {
@@ -105,6 +128,21 @@ namespace APICatalogo.Controllers
             return Ok(categoriaDto);
         }
 
+        /// <summary>
+        /// Inclui uma nova Categoria
+        /// </summary>
+        /// <remarks>
+        /// Exemplo de request:
+        ///     POST api/categorias
+        ///     {
+        ///         "categoriaId":1,
+        ///         "nome":"categoria1",
+        ///         "imagemUrl": "http://teste.net/1.jpg"
+        ///     }
+        /// Retorna um objeto Categoria incluído.
+        /// </remarks>
+        /// <param name="categoriaDto">Objeto DTO da categoria</param>
+        /// <returns>O objeto Categoria incluída</returns>
         [HttpPost]
         public async Task<ActionResult<CategoriaDTO>> Post(CategoriaDTO categoriaDto)
         {
@@ -123,6 +161,21 @@ namespace APICatalogo.Controllers
             return new CreatedAtRouteResult("ObterCategoria", new { id = novaCategoriaDto!.CategoriaId }, novaCategoriaDto);
         }
 
+        /// <summary>
+        /// Altera Categoria existente
+        /// </summary>
+        /// <remarks>
+        /// Exemplo de request:
+        ///     POST api/categorias
+        ///     {
+        ///         "nome":"categoria1",
+        ///         "imagemUrl": "http://teste.net/1.jpg"
+        ///     }
+        /// Retorna um objeto Categoria alterado.
+        /// </remarks>
+        /// <param name="categoriaDto">Objeto DTO da categoria</param>
+        /// <param name="id">Id da categoria</param>
+        /// <returns>O objeto Categoria Alterado</returns>
         [HttpPut("{id:int}")]
         public async Task<ActionResult<CategoriaDTO>> Put(int id, CategoriaDTO categoriaDto)
         {
@@ -141,6 +194,14 @@ namespace APICatalogo.Controllers
             return Ok(categoriaAtualizadaDto);
         }
 
+        /// <summary>
+        /// Deleta Categoria existente
+        /// </summary>
+        /// <remarks>
+        /// Retorna Status code 200.
+        /// </remarks>
+        /// <param name="id">id da categoria</param>
+        /// <returns>Retorna Status code 200.</returns>
         [HttpDelete("{id:int}")]
         [Authorize(Policy = "AdminOnly")]
         public async Task<ActionResult<CategoriaDTO>> Delete(int id)

@@ -3,6 +3,7 @@ using System.Security.Claims;
 using APICatalogo.DTOs;
 using APICatalogo.Models;
 using APICatalogo.Services.Interface;
+using Asp.Versioning;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace APICatalogo.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
+    [ApiVersion("1.0")]
+    [Produces("application/json")] // Faz o metodo de resposta ser o padrao o json
+    [ApiConventionType(typeof(DefaultApiConventions))] // Adiciona os Status a todos os metodos actions como 200,404, 500 etc...
     public class AuthController : ControllerBase
     {
         private readonly ITokenService _tokenService;
@@ -32,6 +36,12 @@ namespace APICatalogo.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Verifica as credenciais de um usuario
+        /// </summary>
+        /// <param name="model">Um objeto do tipo UsuarioDTo</param>
+        /// <returns>Status 200 e o token para o cliente</returns>
+        /// <remarks> Retorna o Status 200 e o token </remarks>
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginModelDTO model)
@@ -83,6 +93,12 @@ namespace APICatalogo.Controllers
             return Unauthorized();
         }
 
+        /// <summary>
+        /// Registra um novo usuarui
+        /// </summary>
+        /// <param name="model">Um objeto UsuarioDTO</param>
+        /// <returns>Status 200</returns>
+        /// <remarks> Retorna o Status 200</remarks>
         [HttpPost]
         [Route("register")]
         public async Task<IActionResult> Register([FromBody] RegisterModelDTO model)

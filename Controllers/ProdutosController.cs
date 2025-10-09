@@ -2,6 +2,7 @@ using APICatalogo.DTOs;
 using APICatalogo.Models;
 using APICatalogo.Pagination;
 using APICatalogo.Repositories.Interface;
+using Asp.Versioning;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
@@ -11,7 +12,10 @@ using Newtonsoft.Json;
 namespace APICatalogo.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
+    [ApiVersion("1.0")]
+    [Produces("application/json")] // Faz o metodo de resposta ser o padrao o json
+    [ApiConventionType(typeof(DefaultApiConventions))] // Adiciona os Status a todos os metodos actions como 200,404, 500 etc...
     public class ProdutosController : ControllerBase
     {
         private readonly IUnitOfWork _uof;
@@ -23,6 +27,11 @@ namespace APICatalogo.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Obtem uma lista de produtos filtrados pelo preço
+        /// </summary>
+        /// <param name="produtosFiltroParams"></param>
+        /// <returns> Uma paginação de produtos filtrados pelo preço</returns>
         [HttpGet("filter/preco/paginacao")]
         public async Task<ActionResult<IEnumerable<ProdutoDTO>>> GetProdutosFilterPreco([FromQuery] ProdutosFiltroPreco produtosFiltroParams)
         {
@@ -45,6 +54,11 @@ namespace APICatalogo.Controllers
             return Ok(produtosDto);
         }
 
+        /// <summary>
+        /// Uma lista de produtos Paginadas
+        /// </summary>
+        /// <param name="produtosParams"></param>
+        /// <returns>Uma paginação de produtos</returns>
         [HttpGet("Paginacao")]
         public async Task<ActionResult<IEnumerable<ProdutoDTO>>> Get([FromQuery] ProdutosParameters produtosParams)
         {
@@ -67,6 +81,10 @@ namespace APICatalogo.Controllers
             return Ok(produtosDto);
         }
 
+        /// <summary>
+        /// Exibe uma relação dos produtos
+        /// </summary>
+        /// <returns>Retorna uma lista de objetos Produto</returns>
         [HttpGet]
         [Authorize(Policy = "UserOnly")]
         public async Task<ActionResult<IEnumerable<ProdutoDTO>>> Get()
@@ -82,6 +100,11 @@ namespace APICatalogo.Controllers
             return Ok(produtosDto);
         }
 
+        /// <summary>
+        /// Obtem o produto pelo seu identificador produtoId
+        /// </summary>
+        /// <param name="id"> Codigo do produto</param>
+        /// <returns>Um objeto Produto</returns>
         [HttpGet("{id:int}", Name = "ObterProduto")]
         public async Task<ActionResult<ProdutoDTO>> Get(int id)
         {
@@ -95,6 +118,24 @@ namespace APICatalogo.Controllers
             return Ok(produtoDto);
         }
 
+        /// <summary>
+        /// Inclui uma novo Produto
+        /// </summary>
+        /// <remarks>
+        /// Exemplo de request:
+        ///     POST api/Produto
+        ///     {
+        ///         "categoriaId":1,
+        ///         "nome":"categoria1",
+        ///         "descricao":"categoria1Desc",
+        ///         "preco":"100",
+        ///         "imagemUrl": "http://teste.net/1.jpg",
+        ///         "categoriaId": "1"
+        ///     }
+        /// Retorna um objeto Produto incluído.
+        /// </remarks>
+        /// <param name="produtoDto">Objeto DTO da Produto</param>
+        /// <returns>O objeto Produto incluído</returns>
         [HttpPost]
         public async Task<ActionResult<ProdutoDTO>> Post(ProdutoDTO produtoDto)
         {
@@ -145,6 +186,25 @@ namespace APICatalogo.Controllers
             return Ok(_mapper.Map<ProdutoDTOUpdateResponse>(produto));
         }
 
+        /// <summary>
+        /// Atualiza uma novo Produto
+        /// </summary>
+        /// <remarks>
+        /// Exemplo de request:
+        ///     Put api/Produto
+        ///     {
+        ///         "categoriaId":1,
+        ///         "nome":"categoria1",
+        ///         "descricao":"categoria1Desc",
+        ///         "preco":"100",
+        ///         "imagemUrl": "http://teste.net/1.jpg",
+        ///         "categoriaId": "1"
+        ///     }
+        /// Retorna um objeto Produto Alterado.
+        /// </remarks>
+        /// <param name="produtoDto">Objeto DTO da Produto</param>
+        /// <param name="id">id de Produto</param>
+        /// <returns>O objeto Produto Alterado</returns>
         [HttpPut("{id:int}")]
         public async Task<ActionResult<ProdutoDTO>> Put(int id, ProdutoDTO produtoDto)
         {
@@ -168,6 +228,14 @@ namespace APICatalogo.Controllers
             }
         }
 
+        /// <summary>
+        /// Deleta um Produto existente
+        /// </summary>
+        /// <remarks>
+        /// Retorna Status code 200.
+        /// </remarks>
+        /// <param name="id">id de Produto</param>
+        /// <returns>Retorna Status code 200.</returns>
         [HttpDelete("{id:int}")]
         public async Task<ActionResult<ProdutoDTO>> Delete(int id)
         {
