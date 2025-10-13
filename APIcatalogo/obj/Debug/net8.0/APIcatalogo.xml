@@ -94,6 +94,7 @@
             Retorna um objeto Categoria alterado.
             </remarks>
             <param name="categoriaDto">Objeto DTO da categoria</param>
+            <param name="id">Id da categoria</param>
             <returns>O objeto Categoria Alterado</returns>
         </member>
         <member name="M:APICatalogo.Controllers.CategoriasController.Delete(System.Int32)">

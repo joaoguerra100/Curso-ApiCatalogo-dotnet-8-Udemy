@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dajU6vDHkIoO6ttI8PyPXiRnnst1bwmQa5C3fuZMs236OXeqGVTPuV8+TjlD+PC8K40KG2mKgRCfBKvZySarjA==",
+  "dgSpecHash": "LwuJlJG1rLwBnXucPUtAkaOx9DXwwQz87dfwgdGen9v2di7sT37yDZW8ViqYKCMmSDvI0Uxc2QTlWhDMDRR54g==",
   "success": true,
-  "projectFilePath": "C:\\Sistemas\\Projetos\\dotnet\\APIcatalogo\\APIcatalogo.csproj",
+  "projectFilePath": "C:\\Sistemas\\Projetos\\dotnet\\ProjetoCatalogo\\APIcatalogo\\APIcatalogo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\E502431\\.nuget\\packages\\asp.versioning.abstractions\\8.1.0\\asp.versioning.abstractions.8.1.0.nupkg.sha512",
     "C:\\Users\\E502431\\.nuget\\packages\\asp.versioning.http\\8.1.0\\asp.versioning.http.8.1.0.nupkg.sha512",

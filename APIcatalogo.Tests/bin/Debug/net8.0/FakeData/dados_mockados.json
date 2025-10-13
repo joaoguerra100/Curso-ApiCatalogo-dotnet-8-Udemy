@@ -1,0 +1,316 @@
+{
+  "Categorias": [
+    {
+      "CategoriaId": 1,
+      "Nome": "Categoria1",
+      "ImagemURL": "https://example.com/imagem_categoria1.jpg"
+    },
+    {
+      "CategoriaId": 2,
+      "Nome": "Categoria2",
+      "ImagemURL": "https://example.com/imagem_categoria2.jpg"
+    },
+    {
+      "CategoriaId": 3,
+      "Nome": "Categoria3",
+      "ImagemURL": "https://example.com/imagem_categoria3.jpg"
+    },
+    {
+      "CategoriaId": 4,
+      "Nome": "Categoria4",
+      "ImagemURL": "https://example.com/imagem_categoria4.jpg"
+    },
+    {
+      "CategoriaId": 5,
+      "Nome": "Categoria5",
+      "ImagemURL": "https://example.com/imagem_categoria5.jpg"
+    },
+    {
+      "CategoriaId": 6,
+      "Nome": "Categorias6",
+      "ImagemURL": "https://example.com/imagem_categoria6.jpg"
+    }
+  ],
+  "Produtos": [
+    {
+      "ProdutoId": 1,
+      "Nome": "Produto01",
+      "Descricao": "Desc01",
+      "Preco": 378.42,
+      "ImagemUrl": "https://example.com/imagem_produto1.jpg",
+      "Estoque": 24.06,
+      "DataCadastro": "2025-09-18T17:18:42.939333",
+      "CategoriaId": 4
+    },
+    {
+      "ProdutoId": 3,
+      "Nome": "Produto03",
+      "Descricao": "Desc03",
+      "Preco": 388.97,
+      "ImagemUrl": "https://example.com/imagem_produto3.jpg",
+      "Estoque": 47.92,
+      "DataCadastro": "2024-11-01T17:18:42.939372",
+      "CategoriaId": 3
+    },
+    {
+      "ProdutoId": 4,
+      "Nome": "Produto04",
+      "Descricao": "Desc04",
+      "Preco": 115.59,
+      "ImagemUrl": "https://example.com/imagem_produto4.jpg",
+      "Estoque": 67.93,
+      "DataCadastro": "2025-04-01T17:18:42.939379",
+      "CategoriaId": 2
+    },
+    {
+      "ProdutoId": 5,
+      "Nome": "Produto05",
+      "Descricao": "Desc05",
+      "Preco": 81.78,
+      "ImagemUrl": "https://example.com/imagem_produto5.jpg",
+      "Estoque": 14.64,
+      "DataCadastro": "2025-07-11T17:18:42.939386",
+      "CategoriaId": 5
+    },
+    {
+      "ProdutoId": 6,
+      "Nome": "Produto06",
+      "Descricao": "Desc06",
+      "Preco": 139.79,
+      "ImagemUrl": "https://example.com/imagem_produto6.jpg",
+      "Estoque": 30.16,
+      "DataCadastro": "2024-10-01T17:18:42.939392",
+      "CategoriaId": 1
+    },
+    {
+      "ProdutoId": 7,
+      "Nome": "Produto07",
+      "Descricao": "Desc07",
+      "Preco": 107.55,
+      "ImagemUrl": "https://example.com/imagem_produto7.jpg",
+      "Estoque": 3.35,
+      "DataCadastro": "2024-12-27T17:18:42.939398",
+      "CategoriaId": 5
+    },
+    {
+      "ProdutoId": 8,
+      "Nome": "Produto08",
+      "Descricao": "Desc08",
+      "Preco": 377.42,
+      "ImagemUrl": "https://example.com/imagem_produto8.jpg",
+      "Estoque": 65.49,
+      "DataCadastro": "2025-08-22T17:18:42.939404",
+      "CategoriaId": 3
+    },
+    {
+      "ProdutoId": 9,
+      "Nome": "Produto09",
+      "Descricao": "Desc09",
+      "Preco": 378.73,
+      "ImagemUrl": "https://example.com/imagem_produto9.jpg",
+      "Estoque": 70.07,
+      "DataCadastro": "2025-07-04T17:18:42.93941",
+      "CategoriaId": 3
+    },
+    {
+      "ProdutoId": 10,
+      "Nome": "Produto10",
+      "Descricao": "Desc10",
+      "Preco": 441.84,
+      "ImagemUrl": "https://example.com/imagem_produto10.jpg",
+      "Estoque": 81.72,
+      "DataCadastro": "2024-12-26T17:18:42.939416",
+      "CategoriaId": 5
+    },
+    {
+      "ProdutoId": 11,
+      "Nome": "Produto11",
+      "Descricao": "Desc11",
+      "Preco": 352.66,
+      "ImagemUrl": "https://example.com/imagem_produto11.jpg",
+      "Estoque": 57.73,
+      "DataCadastro": "2024-10-13T17:18:42.939421",
+      "CategoriaId": 1
+    },
+    {
+      "ProdutoId": 12,
+      "Nome": "Produto12",
+      "Descricao": "Desc12",
+      "Preco": 312.31,
+      "ImagemUrl": "https://example.com/imagem_produto12.jpg",
+      "Estoque": 67.56,
+      "DataCadastro": "2025-08-16T17:18:42.939426",
+      "CategoriaId": 4
+    },
+    {
+      "ProdutoId": 13,
+      "Nome": "Produto13",
+      "Descricao": "Desc13",
+      "Preco": 487.41,
+      "ImagemUrl": "https://example.com/imagem_produto13.jpg",
+      "Estoque": 28.93,
+      "DataCadastro": "2025-01-16T17:18:42.939431",
+      "CategoriaId": 1
+    },
+    {
+      "ProdutoId": 14,
+      "Nome": "Produto Atualizado - Testes",
+      "Descricao": "Minha Descricao",
+      "Preco": 0,
+      "ImagemUrl": "imagem1.jpg",
+      "Estoque": 0,
+      "DataCadastro": "0001-01-01T00:00:00",
+      "CategoriaId": 2
+    },
+    {
+      "ProdutoId": 15,
+      "Nome": "Produto15",
+      "Descricao": "Desc15",
+      "Preco": 397.78,
+      "ImagemUrl": "https://example.com/imagem_produto15.jpg",
+      "Estoque": 22.68,
+      "DataCadastro": "2025-01-17T17:18:42.939442",
+      "CategoriaId": 5
+    },
+    {
+      "ProdutoId": 16,
+      "Nome": "Produto16",
+      "Descricao": "Desc16",
+      "Preco": 223.55,
+      "ImagemUrl": "https://example.com/imagem_produto16.jpg",
+      "Estoque": 36.94,
+      "DataCadastro": "2024-12-04T17:18:42.939446",
+      "CategoriaId": 4
+    },
+    {
+      "ProdutoId": 17,
+      "Nome": "Produto17",
+      "Descricao": "Desc17",
+      "Preco": 333.63,
+      "ImagemUrl": "https://example.com/imagem_produto17.jpg",
+      "Estoque": 29.07,
+      "DataCadastro": "2025-01-17T17:18:42.939451",
+      "CategoriaId": 4
+    },
+    {
+      "ProdutoId": 18,
+      "Nome": "Produto18",
+      "Descricao": "Desc18",
+      "Preco": 479.21,
+      "ImagemUrl": "https://example.com/imagem_produto18.jpg",
+      "Estoque": 38.01,
+      "DataCadastro": "2025-09-24T17:18:42.939456",
+      "CategoriaId": 2
+    },
+    {
+      "ProdutoId": 19,
+      "Nome": "Produto19",
+      "Descricao": "Desc19",
+      "Preco": 125.13,
+      "ImagemUrl": "https://example.com/imagem_produto19.jpg",
+      "Estoque": 57.45,
+      "DataCadastro": "2024-12-21T17:18:42.939461",
+      "CategoriaId": 1
+    },
+    {
+      "ProdutoId": 20,
+      "Nome": "Produto20",
+      "Descricao": "Desc20",
+      "Preco": 434.06,
+      "ImagemUrl": "https://example.com/imagem_produto20.jpg",
+      "Estoque": 26.08,
+      "DataCadastro": "2025-04-12T17:18:42.93947",
+      "CategoriaId": 5
+    },
+    {
+      "ProdutoId": 21,
+      "Nome": "Produto21",
+      "Descricao": "Desc21",
+      "Preco": 500,
+      "ImagemUrl": "https://example.com/imagem_produto21.jpg",
+      "Estoque": 0,
+      "DataCadastro": "0001-01-01T00:00:00",
+      "CategoriaId": 6
+    },
+    {
+      "ProdutoId": 22,
+      "Nome": "Novo Produto",
+      "Descricao": "Descri\u00E7\u00E3o do Novo Produto",
+      "Preco": 10.99,
+      "ImagemUrl": "imagemFake1.jpg",
+      "Estoque": 0,
+      "DataCadastro": "0001-01-01T00:00:00",
+      "CategoriaId": 2
+    },
+    {
+      "ProdutoId": 23,
+      "Nome": "Novo Produto",
+      "Descricao": "Descri\u00E7\u00E3o do Novo Produto",
+      "Preco": 10.99,
+      "ImagemUrl": "imagemFake1.jpg",
+      "Estoque": 0,
+      "DataCadastro": "0001-01-01T00:00:00",
+      "CategoriaId": 2
+    },
+    {
+      "ProdutoId": 24,
+      "Nome": "Novo Produto",
+      "Descricao": "Descri\u00E7\u00E3o do Novo Produto",
+      "Preco": 10.99,
+      "ImagemUrl": "imagemFake1.jpg",
+      "Estoque": 0,
+      "DataCadastro": "0001-01-01T00:00:00",
+      "CategoriaId": 2
+    },
+    {
+      "ProdutoId": 25,
+      "Nome": "Novo Produto",
+      "Descricao": "Descri\u00E7\u00E3o do Novo Produto",
+      "Preco": 10.99,
+      "ImagemUrl": "imagemFake1.jpg",
+      "Estoque": 0,
+      "DataCadastro": "0001-01-01T00:00:00",
+      "CategoriaId": 2
+    },
+    {
+      "ProdutoId": 26,
+      "Nome": "Novo Produto",
+      "Descricao": "Descri\u00E7\u00E3o do Novo Produto",
+      "Preco": 10.99,
+      "ImagemUrl": "imagemFake1.jpg",
+      "Estoque": 0,
+      "DataCadastro": "0001-01-01T00:00:00",
+      "CategoriaId": 2
+    },
+    {
+      "ProdutoId": 27,
+      "Nome": "Novo Produto",
+      "Descricao": "Descri\u00E7\u00E3o do Novo Produto",
+      "Preco": 10.99,
+      "ImagemUrl": "imagemFake1.jpg",
+      "Estoque": 0,
+      "DataCadastro": "0001-01-01T00:00:00",
+      "CategoriaId": 2
+    },
+    {
+      "ProdutoId": 28,
+      "Nome": "Novo Produto",
+      "Descricao": "Descri\u00E7\u00E3o do Novo Produto",
+      "Preco": 10.99,
+      "ImagemUrl": "imagemFake1.jpg",
+      "Estoque": 0,
+      "DataCadastro": "0001-01-01T00:00:00",
+      "CategoriaId": 2
+    },
+    {
+      "ProdutoId": 29,
+      "Nome": "Novo Produto",
+      "Descricao": "Descri\u00E7\u00E3o do Novo Produto",
+      "Preco": 10.99,
+      "ImagemUrl": "imagemFake1.jpg",
+      "Estoque": 0,
+      "DataCadastro": "0001-01-01T00:00:00",
+      "CategoriaId": 2
+    }
+  ]
+}

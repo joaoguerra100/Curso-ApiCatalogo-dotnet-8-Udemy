@@ -1,0 +1,32 @@
+[
+  {
+    "CategoriaId": 1,
+    "Nome": "Categoria1",
+    "ImagemURL": "https://example.com/imagem_categoria1.jpg"
+  },
+  {
+    "CategoriaId": 2,
+    "Nome": "Categoria2",
+    "ImagemURL": "https://example.com/imagem_categoria2.jpg"
+  },
+  {
+    "CategoriaId": 3,
+    "Nome": "Categoria3",
+    "ImagemURL": "https://example.com/imagem_categoria3.jpg"
+  },
+  {
+    "CategoriaId": 4,
+    "Nome": "Categoria4",
+    "ImagemURL": "https://example.com/imagem_categoria4.jpg"
+  },
+  {
+    "CategoriaId": 5,
+    "Nome": "Categoria5",
+    "ImagemURL": "https://example.com/imagem_categoria5.jpg"
+  },
+  {
+    "CategoriaId": 6,
+    "Nome": "Categorias6",
+    "ImagemURL": "https://example.com/imagem_categoria6.jpg"
+  }
+]

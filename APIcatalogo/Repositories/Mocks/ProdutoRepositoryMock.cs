@@ -24,9 +24,7 @@ namespace APICatalogo.Repositories.Mocks
         public async Task<Produto> GetProdutoAsync(int id)
         {
             var produto = _produtos.FirstOrDefault(p => p.ProdutoId == id);
-            if (produto == null)
-                throw new InvalidOperationException("Produto é null");
-            return await Task.FromResult(produto);
+            return await Task.FromResult(produto!);
         }
 
         public async Task<PagedList<Produto>> GetProdutosPaginadoAsync(ProdutosParameters produtosParameters)
@@ -64,7 +62,7 @@ namespace APICatalogo.Repositories.Mocks
         public Produto Create(Produto produto)
         {
             if (produto == null)
-                throw new InvalidOperationException("Produto é null");
+                return null!;
 
             produto.ProdutoId = _produtos.Max(p => p.ProdutoId) + 1;
             _produtos.Add(produto);
@@ -75,7 +73,7 @@ namespace APICatalogo.Repositories.Mocks
         public bool Update(Produto produto)
         {
             if (produto == null)
-                throw new InvalidOperationException("Produto é null");
+                return false;
 
             var index = _produtos.FindIndex(p => p.ProdutoId == produto.ProdutoId);
             if (index == -1) return false;
@@ -102,7 +100,7 @@ namespace APICatalogo.Repositories.Mocks
             var dados = JsonSerializer.Deserialize<Dictionary<string, object>>(jsonAtual);
 
             // Atualiza apenas a parte de produtos
-            dados["Produtos"] = _produtos;
+            dados!["Produtos"] = _produtos;
 
             // Reescreve o JSON mantendo categorias
             var jsonNovo = JsonSerializer.Serialize(dados, new JsonSerializerOptions { WriteIndented = true });

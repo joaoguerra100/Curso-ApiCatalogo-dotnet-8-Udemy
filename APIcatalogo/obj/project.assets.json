@@ -4309,11 +4309,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Sistemas\\Projetos\\dotnet\\APIcatalogo\\APIcatalogo.csproj",
+      "projectUniqueName": "C:\\Sistemas\\Projetos\\dotnet\\ProjetoCatalogo\\APIcatalogo\\APIcatalogo.csproj",
       "projectName": "APIcatalogo",
-      "projectPath": "C:\\Sistemas\\Projetos\\dotnet\\APIcatalogo\\APIcatalogo.csproj",
+      "projectPath": "C:\\Sistemas\\Projetos\\dotnet\\ProjetoCatalogo\\APIcatalogo\\APIcatalogo.csproj",
       "packagesPath": "C:\\Users\\E502431\\.nuget\\packages\\",
-      "outputPath": "C:\\Sistemas\\Projetos\\dotnet\\APIcatalogo\\obj\\",
+      "outputPath": "C:\\Sistemas\\Projetos\\dotnet\\ProjetoCatalogo\\APIcatalogo\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\E502431\\AppData\\Roaming\\NuGet\\NuGet.Config"
