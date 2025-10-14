@@ -205,6 +205,8 @@ builder.Logging.AddProvider(new CustomLoggerProvider(new CustomLoggerProviderCon
 
 builder.Services.AddAutoMapper(typeof(ProdutoDTOMappingProfile));
 
+builder.Services.AddMemoryCache();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
