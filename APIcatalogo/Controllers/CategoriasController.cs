@@ -118,7 +118,7 @@ namespace APICatalogo.Controllers
                     return NotFound("Não existem categorias");
                 }
             }
-            var categoriasDto = categorias.ToCategoriaDTOList();
+            var categoriasDto = categorias!.ToCategoriaDTOList();
 
             return Ok(categoriasDto);
         }
@@ -257,7 +257,7 @@ namespace APICatalogo.Controllers
         /// <param name="id">id da categoria</param>
         /// <returns>Retorna Status code 200.</returns>
         [HttpDelete("{id:int}")]
-        [Authorize(Policy = "AdminOnly")]
+        /* [Authorize(Policy = "AdminOnly")] */
         public async Task<ActionResult<CategoriaDTO>> Delete(int id)
         {
             var categoria = await _uof.CategoriaRepository.GetCategoriaAsync(id);

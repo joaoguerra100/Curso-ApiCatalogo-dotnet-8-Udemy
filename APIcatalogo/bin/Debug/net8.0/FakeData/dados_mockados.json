@@ -29,6 +29,16 @@
       "CategoriaId": 6,
       "Nome": "Categorias6",
       "ImagemURL": "https://example.com/imagem_categoria6.jpg"
+    },
+    {
+      "CategoriaId": 7,
+      "Nome": "Eletronicos",
+      "ImagemURL": "/imagens/eletronicos.jpg"
+    },
+    {
+      "CategoriaId": 8,
+      "Nome": "teste atualizado",
+      "ImagemURL": "teste atualizado"
     }
   ],
   "Produtos": [
