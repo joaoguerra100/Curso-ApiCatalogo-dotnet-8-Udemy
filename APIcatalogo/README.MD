@@ -1,8 +1,27 @@
-------------Descrição---------------
+# 📦 API de Categorias (.NET 8 Web API)
+
 Curso de dotnet 8 webapi de catalogos na udemy pelo jose carlos macoratti
 curso: O essencial para criar APIs da Web na plataforma .NET
 
----------------Pacotes necessarios para instalação---------------------
+## 🚀 Funcionalidades
+
+- CRUD completo de categorias
+- Autenticação com JWT
+- Versionamento de API
+- Suporte a PATCH com JsonPatch
+- Integração com PostgreSQL via Entity Framework Core
+
+## 📚 Tecnologias e Pacotes
+
+- ASP.NET Core 8
+- Entity Framework Core
+- AutoMapper
+- JWT Authentication
+- PostgreSQL
+- API Versioning
+
+### 📦 Pacotes instalados
+
 dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
 
 dotnet add package Microsoft.EntityFrameworkCore.Tools

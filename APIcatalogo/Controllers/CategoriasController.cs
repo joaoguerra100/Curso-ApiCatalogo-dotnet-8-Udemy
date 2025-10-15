@@ -93,7 +93,6 @@ namespace APICatalogo.Controllers
         /// </summary>
         /// <returns> Uma lista de objetos Categoria </returns>
         [HttpGet]
-        [Authorize]
         [ServiceFilter(typeof(ApiLoggingFilter))]
         [DisableRateLimiting]// Desabilita o limite de Requisiçoes que se pode fazer
         public async Task<ActionResult<IEnumerable<CategoriaDTO>>> Get()
